@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: AI-website-main
+        working-directory: OneDrive/Bureau/AI-website-main/AI-website-main
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: AI-website-main/package-lock.json
+          cache-dependency-path: OneDrive/Bureau/AI-website-main/AI-website-main/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -41,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: AI-website-main/out
+          path: OneDrive/Bureau/AI-website-main/AI-website-main/out
 
   deploy:
     environment:
