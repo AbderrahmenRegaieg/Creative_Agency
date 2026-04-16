@@ -99,13 +99,9 @@ export default function ProcessRail() {
                 <h3 className="mb-2 text-[22px] font-semibold text-ink">
                   {s.title}
                 </h3>
-                <p className="mb-6 text-[14px] leading-relaxed text-ink/65">
+                <p className="text-[14px] leading-relaxed text-ink/65">
                   {s.body}
                 </p>
-                <span className="eyebrow inline-flex items-center gap-1.5 rounded-full bg-white/50 px-3 py-1 text-[10px] text-ink/70">
-                  <span aria-hidden>✦</span>
-                  {s.badge}
-                </span>
               </motion.div>
             ))}
           </div>
