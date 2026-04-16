@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { asset } from "@/lib/asset";
 
 type Project = {
   title: string;
@@ -98,7 +99,7 @@ export default function BentoWork() {
             {projects.map((p, i) => (
               <motion.div
                 key={p.title}
-                onClick={() => p.video && setActiveVideo(p.video)}
+                onClick={() => p.video && setActiveVideo(asset(p.video))}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -116,7 +117,7 @@ export default function BentoWork() {
                   {/* video background */}
                   {p.video && (
                     <video
-                      src={p.video}
+                      src={asset(p.video)}
                       autoPlay
                       muted
                       loop

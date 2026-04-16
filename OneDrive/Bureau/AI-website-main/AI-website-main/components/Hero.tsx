@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 
 const headlineWords = [
   { text: "We", italic: false },
@@ -191,7 +192,7 @@ export default function Hero() {
                 className="relative h-40 w-full overflow-hidden rounded-[18px] bg-ink/10"
               >
                 <video
-                  src={t.video}
+                  src={asset(t.video)}
                   autoPlay
                   muted
                   loop

@@ -1,3 +1,5 @@
+import { asset } from "@/lib/asset";
+
 type Props = {
   variant?: "wordmark" | "mark";
   className?: string;
@@ -7,7 +9,7 @@ export default function Logo({ variant = "wordmark", className = "" }: Props) {
   if (variant === "mark") {
     return (
       <img
-        src="/logo.jpg"
+        src={asset("/logo.jpg")}
         alt="Level Up Agency"
         className={`h-8 w-8 object-contain ${className}`}
       />
@@ -17,7 +19,7 @@ export default function Logo({ variant = "wordmark", className = "" }: Props) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <img
-        src="/logo.jpg"
+        src={asset("/logo.jpg")}
         alt="Level Up Agency"
         className="h-8 w-8 object-contain"
       />
