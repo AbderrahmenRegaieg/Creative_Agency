@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "Level Up Agency — AI Creative Studio",
   description:
     "Level Up Agency engineers cinematic AI video, living avatars, and always-on UGC for founders and brands who refuse to blend in.",
+  icons: {
+    icon: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({
