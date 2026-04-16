@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a1a3a;
+  --porcelain: #f7f9fc;
+  --azure: #0a84ff;
+  --sky: #64b5ff;
+  --mist: rgba(255, 255, 255, 0.45);
+  --edge: rgba(255, 255, 255, 0.7);
+}
+
+html,
+body {
+  background: var(--porcelain);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Film-grain noise overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+}
+
+/* ---------- Glass Primitive ---------- */
+.glass {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.58),
+    rgba(255, 255, 255, 0.22)
+  );
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(10, 132, 255, 0.08),
+    0 20px 60px -20px rgba(10, 26, 58, 0.25),
+    0 2px 8px -2px rgba(10, 26, 58, 0.1);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.glass:hover::before {
+  transform: translateX(120%);
+}
+
+.glass-hover:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(10, 132, 255, 0.15),
+    0 28px 70px -20px rgba(10, 26, 58, 0.28),
+    0 4px 10px -2px rgba(10, 26, 58, 0.12);
+}
+
+/* Chromatic edge on hover */
+.glass-chromatic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 132, 255, 0),
+    rgba(10, 132, 255, 0.5) 40%,
+    rgba(100, 181, 255, 0.8) 60%,
+    rgba(10, 132, 255, 0) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glass-chromatic:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Mesh Gradient Background ---------- */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--porcelain);
+}
+
+.mesh-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.mesh-blob-1 {
+  top: -10%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, #cfe3ff 0%, transparent 70%);
+  animation: drift 30s ease-in-out infinite;
+}
+
+.mesh-blob-2 {
+  top: 20%;
+  right: -15%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, #e6d9ff 0%, transparent 70%);
+  animation: drift 45s ease-in-out infinite reverse;
+}
+
+.mesh-blob-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, #d1e7ff 0%, transparent 70%);
+  animation: drift 38s ease-in-out infinite;
+}
+
+.mesh-blob-4 {
+  top: 40%;
+  left: 35%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+  animation: drift 25s ease-in-out infinite reverse;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  33% {
+    transform: translate(4%, -3%) scale(1.05);
+  }
+  66% {
+    transform: translate(-3%, 4%) scale(0.98);
+  }
+}
+
+/* ---------- Utility helpers ---------- */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(10, 26, 58, 0.6);
+}
+
+.display {
+  font-family: var(--font-display), serif;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+.italic-display {
+  font-family: var(--font-display), serif;
+  font-style: italic;
+}
+
+/* Primary filled button */
+.btn-azure {
+  background: linear-gradient(180deg, #2a98ff 0%, #0a84ff 50%, #0070e0 100%);
+  color: white;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 10px 24px -10px rgba(10, 132, 255, 0.55),
+    0 2px 6px -2px rgba(10, 132, 255, 0.4);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-azure:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 16px 32px -10px rgba(10, 132, 255, 0.7),
+    0 4px 10px -2px rgba(10, 132, 255, 0.5);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--azure);
+  outline-offset: 3px;
+  border-radius: 14px;
+}
+
+/* Marquee row */
+.marquee-track {
+  display: flex;
+  gap: 4rem;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Scroll snap rail */
+.snap-rail {
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.snap-rail::-webkit-scrollbar {
+  display: none;
+}
+.snap-rail > * {
+  scroll-snap-align: start;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .mesh-blob {
+    animation: none !important;
+  }
+}
