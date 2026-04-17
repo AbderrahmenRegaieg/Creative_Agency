@@ -120,7 +120,7 @@ export default function Nav() {
           initial={false}
           animate={{ y: open ? 0 : -40, opacity: open ? 1 : 0 }}
           transition={{ duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
-          className="glass absolute left-1/2 top-24 w-[calc(100%-2rem)] -translate-x-1/2 p-6"
+          className="glass absolute inset-x-4 top-20 p-5 pb-7"
         >
           <ul className="flex flex-col gap-1">
             {links.map((l, i) => (
@@ -136,7 +136,7 @@ export default function Nav() {
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-2xl px-4 py-4 text-2xl italic-display text-ink transition hover:bg-white/50"
+                  className="block rounded-2xl px-4 py-3.5 text-2xl italic-display text-ink transition hover:bg-white/50"
                 >
                   {l.label}
                 </a>
@@ -146,7 +146,7 @@ export default function Nav() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="btn-azure mt-4 flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold"
+            className="btn-azure mt-4 flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-semibold"
           >
             Start a Project <span aria-hidden>→</span>
           </a>
