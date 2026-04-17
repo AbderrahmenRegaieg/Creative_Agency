@@ -65,22 +65,22 @@ export default function Hero() {
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-screen items-center px-6 pt-32 md:px-12 lg:px-20"
+      className="relative flex min-h-screen items-center px-5 pt-24 pb-24 md:px-12 md:pt-32 md:pb-16 lg:px-20 lg:pb-0"
     >
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-12">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
         {/* Left column */}
         <div className="lg:col-span-7">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="eyebrow mb-6 flex items-center gap-3"
+            className="eyebrow mb-5 flex items-center gap-3"
           >
             <span className="inline-block h-[6px] w-[6px] rounded-full bg-azure" />
             AI Creative Studio — Est. 2025
           </motion.p>
 
-          <h1 className="display text-[clamp(48px,7vw,104px)] text-ink">
+          <h1 className="display text-[clamp(42px,7vw,104px)] text-ink">
             {headlineWords.map((w, i) => (
               <span key={i} className="inline-block overflow-hidden align-baseline">
                 <motion.span
@@ -106,7 +106,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.6 }}
-            className="mt-8 max-w-[520px] text-[17px] leading-[1.55] text-ink/70"
+            className="mt-6 max-w-[520px] text-[15px] leading-[1.55] text-ink/70 md:text-[17px]"
           >
             Level Up Agency engineers cinematic AI video, living avatars, and
             always-on UGC for founders and brands.
@@ -116,28 +116,58 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.05, duration: 0.6 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
+            className="mt-6 flex flex-wrap items-center gap-3"
           >
             <a
               href="#work"
-              className="glass glass-hover glass-chromatic inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-ink"
+              className="glass glass-hover glass-chromatic inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-ink md:px-6 md:py-3"
             >
               See the Work
             </a>
             <a
               href="https://calendly.com/habibboulila22/30min"
-              className="btn-azure inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
+              className="btn-azure inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold md:px-6 md:py-3"
             >
               Book a Discovery Call
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </a>
           </motion.div>
 
+          {/* Mobile-only video strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.15, duration: 0.6 }}
+            className="mt-8 flex gap-3 overflow-x-auto pb-2 lg:hidden"
+            style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+          >
+            {thumbs.map((t, i) => (
+              <div key={i} className="glass shrink-0 w-[180px] p-2.5 sm:w-[200px]">
+                <div className="relative h-24 w-full overflow-hidden rounded-[14px] bg-ink/10 sm:h-28">
+                  <video
+                    src={asset(t.video)}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <span className="absolute bottom-1.5 right-1.5 rounded-full bg-black/40 px-1.5 py-0.5 text-[9px] font-medium text-white/90 backdrop-blur-md">
+                    {t.duration}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between px-1 pt-2 pb-0.5">
+                  <span className="eyebrow text-[8px]">{t.tag}</span>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.3, duration: 0.8 }}
-            className="mt-14 flex items-center gap-4 text-ink/50"
+            className="mt-8 flex items-center gap-4 text-ink/50 md:mt-14"
           >
             <div className="flex -space-x-2">
               {[0, 1, 2, 3].map((i) => (
@@ -164,7 +194,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right column: floating glass thumbs */}
+        {/* Right column: floating glass thumbs — desktop only */}
         <div className="relative hidden h-[520px] lg:col-span-5 lg:block">
           {thumbs.map((t, i) => (
             <motion.div
@@ -188,9 +218,7 @@ export default function Hero() {
               }}
               className="glass glass-hover absolute w-[280px] p-3"
             >
-              <div
-                className="relative h-40 w-full overflow-hidden rounded-[18px] bg-ink/10"
-              >
+              <div className="relative h-40 w-full overflow-hidden rounded-[18px] bg-ink/10">
                 <video
                   src={asset(t.video)}
                   autoPlay
@@ -199,11 +227,9 @@ export default function Hero() {
                   playsInline
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                {/* faux video timestamp */}
                 <span className="absolute bottom-2 right-2 rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-medium text-white/90 backdrop-blur-md">
                   {t.duration}
                 </span>
-                {/* play button */}
                 <div className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 backdrop-blur-md ring-1 ring-white/50">
                   <svg
                     viewBox="0 0 12 14"
@@ -230,9 +256,9 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-8 left-0 w-full overflow-hidden"
+        className="absolute bottom-6 left-0 w-full overflow-hidden md:bottom-8"
       >
-        <div className="marquee-track text-[13px] font-medium tracking-wide text-ink/30">
+        <div className="marquee-track text-[11px] font-medium tracking-wide text-ink/30 md:text-[13px]">
           {Array.from({ length: 2 }).flatMap((_, r) =>
             [
               "MONSTER ENERGY",
@@ -246,7 +272,7 @@ export default function Hero() {
             ].map((b, i) => (
               <span
                 key={`${r}-${i}`}
-                className="flex items-center gap-16 whitespace-nowrap"
+                className="flex items-center gap-10 whitespace-nowrap md:gap-16"
               >
                 {b}
                 <span className="inline-block h-1 w-1 rounded-full bg-ink/20" />

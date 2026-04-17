@@ -14,7 +14,7 @@ const columns = [
   },
   {
     title: "Studio",
-    links: ["About", ],
+    links: ["About"],
   },
   {
     title: "Contact",
@@ -28,7 +28,7 @@ const columns = [
 export default function Footer() {
   return (
     <footer className="relative px-4 pb-6 pt-10 md:px-6">
-      <div className="glass mx-auto max-w-7xl p-8 md:p-12">
+      <div className="glass mx-auto max-w-7xl p-6 md:p-12">
         {/* top accent line */}
         <div
           aria-hidden
@@ -39,8 +39,8 @@ export default function Footer() {
           }}
         />
 
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4 md:gap-12">
-          <div className="col-span-2 md:col-span-1">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-12">
+          <div className="sm:col-span-2 md:col-span-1">
             <Logo />
             <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-ink/60">
               An AI creative studio for founders and brands who refuse to blend
@@ -88,8 +88,12 @@ export default function Footer() {
                       }
                       target={l === "Book a call" ? "_blank" : undefined}
                       rel={l === "Book a call" ? "noopener noreferrer" : undefined}
-                      onClick={!["Book a call", "abderrahmen@levelupagence.com"].includes(l) ? (e) => e.preventDefault() : undefined}
-                      className="text-[14px] text-ink/70 transition-colors hover:text-ink cursor-default"
+                      onClick={
+                        !["Book a call", "abderrahmen@levelupagence.com"].includes(l)
+                          ? (e) => e.preventDefault()
+                          : undefined
+                      }
+                      className="break-all text-[13px] text-ink/70 transition-colors hover:text-ink md:text-[14px]"
                     >
                       {l}
                     </a>
@@ -100,7 +104,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-ink/10 pt-6 text-[12px] text-ink/50 md:flex-row md:items-center">
+        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-ink/10 pt-6 text-[12px] text-ink/50 md:mt-12 md:flex-row md:items-center">
           <div>
             &copy; {new Date().getFullYear()} Level Up Agency. All rights
             reserved.
